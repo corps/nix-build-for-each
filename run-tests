@@ -5,8 +5,8 @@ set -o pipefail
 set -x
 
 for file in ./tests/*.test; do
-  if ! (cat "$file" | nix-build-for-each 'echo ' | diff -q $file.expected -); then
-    cat "$file" | nix-build-for-each 'echo ' | diff $file.expected -
+  if ! (cat "$file" | nix-build-for-each 'echo built' | diff -q $file.expected -); then
+    cat "$file" | nix-build-for-each 'echo built' | diff $file.expected -
     echo "Test failed: $file"
     exit 1
   fi

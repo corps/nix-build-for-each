@@ -23,5 +23,11 @@ Tested with nix 2.1.
 ## Usage
 
 ```
-nix-build -A release | nix-build-for-each 'nix store --to s3://my-bucket'
+nix-build -A release 2>&1 | nix-build-for-each 'nix copy --to s3://my-bucket'
+
+# OR
+
+
+nix-build -A release 2>&1 | tee buildoutput
+cat buildoutput | nix-build-for-each 'nix copy --to s3://my-bucket'
 ```

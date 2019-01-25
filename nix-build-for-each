@@ -26,10 +26,10 @@ buildingDrvs=
 stateReadingDrvs=
 stateLastBuildingDrv=
 
-function lastBuildSucceeds() {
-  [[ -z "$stateLastBuildingDrv" ]] && return 0
-  eval "$command $stateLastBuildingDrv"
-  stateLastBuildingDrv=
+function finishBuild() {
+  local nextDrv="$1"
+  ! [[ -z "$stateLastBuildingDrv" ]] && eval "$command $stateLastBuildingDrv"
+  stateLastBuildingDrv="$nextDrv"
 }
 
 function lastBuildFails() {
@@ -57,15 +57,15 @@ $buildingDrvs"
 
   if [[ "$line" =~ ^'building '"'"(.*)'.drv'"'"'...' ]]; then
     nextDrv="${BASH_REMATCH[1]}"
-    (echo "$buildingDrvs" | grep -F "$nextDrv") || continue
-    lastBuildSucceeds
+    (echo "$buildingDrvs" | grep -F "$nextDrv" &>/dev/null) || continue
+    finishBuild "$nextDrv"
   fi
 
   if [[ "$line" =~ ^'error: build of '"'"(.*)'.drv'"'"' failed' ]]; then
     nextDrv="${BASH_REMATCH[1]}"
-    (echo "$buildingDrvs" | grep -F "$nextDrv") || continue
-    lastBuildSucceeds
+    (echo "$buildingDrvs" | grep -F "$nextDrv" &>/dev/null) || continue
+    lastBuildFails
   fi
 done
 
-lastBuildSucceeds
+finishBuild
