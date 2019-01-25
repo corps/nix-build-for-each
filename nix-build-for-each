@@ -28,7 +28,7 @@ stateLastBuildingDrv=
 
 function finishBuild() {
   local nextDrv="$1"
-  ! [[ -z "$stateLastBuildingDrv" ]] && eval "$command $stateLastBuildingDrv"
+  ! [[ -z "$stateLastBuildingDrv" ]] && eval "$command $stateLastBuildingDrv.drv"
   stateLastBuildingDrv="$nextDrv"
 }
 
