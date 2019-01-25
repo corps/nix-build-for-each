@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+set -e
+set -o pipefail
+
+function usage() {
+  echo "Usage: $0 <command>" 1>&2
+  echo "  Each successfully built derivation will be appended to <command> and eval'd" 1>&2
+  exit 1
+}
+
+while getopts "h" opt; do
+  case "$opt" in
+    h)
+      usage
+      ;;
+  esac
+done
+
+shift $((OPTIND-1))
+
+command="$1"
+[[ -z "$command" ]] && usage
+
+buildingDrvs=
+stateReadingDrvs=
+stateLastBuildingDrv=
+
+function lastBuildSucceeds() {
+  [[ -z "$stateLastBuildingDrv" ]] && return 0
+  eval "$command $stateLastBuildingDrv"
+  stateLastBuildingDrv=
+}
+
+function lastBuildFails() {
+  stateLastBuildingDrv=
+}
+
+while IFS='' read -r line; do
+  if ! [[ -z "$stateReadingDrvs" ]]; then
+    if [[ "$line" =~ ^'  '(.*)'.drv' ]]; then
+      # a line containing a derivation to be built
+      buildingDrvs="${BASH_REMATCH[1]}
+$buildingDrvs"
+    else
+      # we are done receiving to be built derivations
+      stateReadingDrvs=
+    fi
+
+    continue
+  fi
+
+  if [[ "$line" =~ ^'these derivations will be built:' ]]; then
+    stateReadingDrvs=1
+    continue;
+  fi
+
+  if [[ "$line" =~ ^'building '"'"(.*)'.drv'"'"'...' ]]; then
+    nextDrv="${BASH_REMATCH[1]}"
+    (echo "$buildingDrvs" | grep -F "$nextDrv") || continue
+    lastBuildSucceeds
+  fi
+
+  if [[ "$line" =~ ^'error: build of '"'"(.*)'.drv'"'"' failed' ]]; then
+    nextDrv="${BASH_REMATCH[1]}"
+    (echo "$buildingDrvs" | grep -F "$nextDrv") || continue
+    lastBuildSucceeds
+  fi
+done
+
+lastBuildSucceeds

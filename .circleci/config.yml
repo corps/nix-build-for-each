@@ -1,0 +1,12 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: lnl7/nix:2018-09-21
+    working_directory: ~/nix-build-for-each
+    steps:
+      - run: |
+          nix-env -i coreutils gnutar bash git gzip openssh nix
+      - checkout
+      - run: |
+          nix-build $PWD/test.nix --show-trace
