@@ -1,0 +1,66 @@
+these derivations will be built:
+  /nix/store/gfwmw531l96smgmd788k4gq19r7fhlb7-nix-build-for-each.drv
+  /nix/store/jyfgaf26wjrwzh8mjvbdc22a98jrwwzj-nix-build-for-each-tests.drv
+these paths will be fetched (20.97 MiB download, 222.12 MiB unpacked):
+  /nix/store/2wdj4rznh37jd44lxz9nn6ymnbqs9axp-diffutils-3.6
+  /nix/store/61m8xswm9xxwb3ddw1za2cxvcikgk656-patch-2.7.6
+  /nix/store/63j8mi5vjyxfc89rhjknwxaxqg3a2sx2-paxctl-0.9
+  /nix/store/6yz7851vibc1xjxpiyfzqqi2ksbv6qah-binutils-wrapper-2.30
+  /nix/store/bqp3d4yhpx6h60fv8jww5id0nkm44034-patchelf-0.9
+  /nix/store/g5dlpwd44kd75i71nwzii8w4bp4inxwk-findutils-4.6.0
+  /nix/store/h0lbngpv6ln56hjj59i6l77vxq25flbz-binutils-2.30
+  /nix/store/i6vl5lwlz5jbkg4r6p340dwmj6fha3xq-stdenv-linux
+  /nix/store/iw94llkj05wgaz268mlzvgx8jkbi1ss0-gcc-wrapper-7.3.0
+  /nix/store/kspghzdcy9wfdikc81mm8lm2gg3zn2w4-ed-1.14.2
+  /nix/store/ql3azyviwyc6w73h6prk1j2945skfapf-gnumake-4.2.1
+  /nix/store/ynb9h0q59ykdpmsn5m2qrkmnq1p683wr-expand-response-params
+copying path '/nix/store/2wdj4rznh37jd44lxz9nn6ymnbqs9axp-diffutils-3.6' from 'https://cache.nixos.org'...
+copying path '/nix/store/h0lbngpv6ln56hjj59i6l77vxq25flbz-binutils-2.30' from 'https://cache.nixos.org'...
+copying path '/nix/store/kspghzdcy9wfdikc81mm8lm2gg3zn2w4-ed-1.14.2' from 'https://cache.nixos.org'...
+copying path '/nix/store/ynb9h0q59ykdpmsn5m2qrkmnq1p683wr-expand-response-params' from 'https://cache.nixos.org'...
+copying path '/nix/store/g5dlpwd44kd75i71nwzii8w4bp4inxwk-findutils-4.6.0' from 'https://cache.nixos.org'...
+copying path '/nix/store/6yz7851vibc1xjxpiyfzqqi2ksbv6qah-binutils-wrapper-2.30' from 'https://cache.nixos.org'...
+copying path '/nix/store/ql3azyviwyc6w73h6prk1j2945skfapf-gnumake-4.2.1' from 'https://cache.nixos.org'...
+copying path '/nix/store/iw94llkj05wgaz268mlzvgx8jkbi1ss0-gcc-wrapper-7.3.0' from 'https://cache.nixos.org'...
+copying path '/nix/store/61m8xswm9xxwb3ddw1za2cxvcikgk656-patch-2.7.6' from 'https://cache.nixos.org'...
+copying path '/nix/store/bqp3d4yhpx6h60fv8jww5id0nkm44034-patchelf-0.9' from 'https://cache.nixos.org'...
+copying path '/nix/store/63j8mi5vjyxfc89rhjknwxaxqg3a2sx2-paxctl-0.9' from 'https://cache.nixos.org'...
+copying path '/nix/store/i6vl5lwlz5jbkg4r6p340dwmj6fha3xq-stdenv-linux' from 'https://cache.nixos.org'...
+building '/nix/store/gfwmw531l96smgmd788k4gq19r7fhlb7-nix-build-for-each.drv'...
+unpacking sources
+unpacking source archive /nix/store/xirg3gay3ilqppakxgl3xw2bzh02cw5b-nix-build-for-each
+source root is nix-build-for-each
+patching sources
+configuring
+no configure script, doing nothing
+building
+no Makefile, doing nothing
+installing
+post-installation fixup
+shrinking RPATHs of ELF executables and libraries in /nix/store/cslq418ljwhr3vc3y122b7bxsn8syfsi-nix-build-for-each
+strip is /nix/store/h0lbngpv6ln56hjj59i6l77vxq25flbz-binutils-2.30/bin/strip
+stripping (with command strip and flags -S) in /nix/store/cslq418ljwhr3vc3y122b7bxsn8syfsi-nix-build-for-each/bin 
+patching script interpreter paths in /nix/store/cslq418ljwhr3vc3y122b7bxsn8syfsi-nix-build-for-each
+/nix/store/cslq418ljwhr3vc3y122b7bxsn8syfsi-nix-build-for-each/bin/nix-build-for-each: interpreter directive changed from "/usr/bin/env bash" to "/nix/store/czx8vkrb9jdgjyz8qfksh10vrnqa723l-bash-4.4-p23/bin/bash"
+checking for references to /tmp/nix-build-nix-build-for-each.drv-0 in /nix/store/cslq418ljwhr3vc3y122b7bxsn8syfsi-nix-build-for-each...
+building '/nix/store/jyfgaf26wjrwzh8mjvbdc22a98jrwwzj-nix-build-for-each-tests.drv'...
+unpacking sources
+unpacking source archive /nix/store/xirg3gay3ilqppakxgl3xw2bzh02cw5b-nix-build-for-each
+source root is nix-build-for-each
+patching sources
+configuring
+no configure script, doing nothing
+building
++ for file in ./tests/*.test
++ cat ./tests/build_ends_in_failure.test
++ nix-build-for-each 'echo '
++ diff -q ./tests/build_ends_in_failure.test.expected -
++ echo 'Success!'
+Success!
+installing
+post-installation fixup
+shrinking RPATHs of ELF executables and libraries in /nix/store/bw4z7wnayrzwc1xj5n5kaxbljslmgwpy-nix-build-for-each-tests
+strip is /nix/store/h0lbngpv6ln56hjj59i6l77vxq25flbz-binutils-2.30/bin/strip
+patching script interpreter paths in /nix/store/bw4z7wnayrzwc1xj5n5kaxbljslmgwpy-nix-build-for-each-tests
+checking for references to /tmp/nix-build-nix-build-for-each-tests.drv-0 in /nix/store/bw4z7wnayrzwc1xj5n5kaxbljslmgwpy-nix-build-for-each-tests...
+/nix/store/bw4z7wnayrzwc1xj5n5kaxbljslmgwpy-nix-build-for-each-tests
